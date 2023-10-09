@@ -1,7 +1,8 @@
 <body background="<?php echo base_url('assets/img/logo.png'); ?>" style="width:100%;height:100%;">
-    <div class="login-form">
+    <div class="login-form" style="text-align: center;">
         <form action="<?php echo base_url('auth'); ?>" method="post">
-            <div class="form-header text-center" Style="font-size:18px;font-weight:700;padding-bottom:15px;">Halaman Login</div>
+            <img style="width: 300px;padding:10px" src="<?php echo base_url('assets/img/bbpmp.png'); ?>"/>
+            <!-- <div class="form-header text-center" Style="font-size:18px;font-weight:700;padding-bottom:15px;">Halaman Login</div> -->
             <?php echo $this->session->flashdata('msg'); ?>
             <div class="flash-data" data-flashdata="<?= $this->session->flashdata('message'); ?>"></div>
             <div class="form-group">

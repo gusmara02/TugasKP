@@ -58,7 +58,7 @@
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 Status
-                                <?php if ($cuti['is_approve'] == 1) : ?>
+                                <?php if ($cuti['is_approve'] == 0) : ?>
                                     <span class="badge badge-light badge-pill" style="font-size:15px;">Diterima</span>
                                 <?php elseif ($cuti['is_approve'] == 2) : ?>
                                     <span class="badge badge-light badge-pill" style="font-size:15px;">Ditolak</span>

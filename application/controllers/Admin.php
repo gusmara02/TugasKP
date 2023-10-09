@@ -9,6 +9,8 @@ class Admin extends CI_Controller
         is_logged_in();
         $this->load->library('form_validation');
         $this->load->model('admin_model', 'admin');
+        $this->load->model('Absensi_model', 'absensi');
+        $this->load->helper('tglindo');
     }
 
     public function index()
@@ -193,5 +195,20 @@ class Admin extends CI_Controller
         $this->db->update('mst_user');
         $this->session->set_flashdata('message', 'Simpan Perubahan');
         redirect('admin/index');
+    }
+
+    public function absensi()
+    {
+        $data['title'] = 'Riwayat Absensi User';
+        $data['user'] = $this->db->get_where('mst_user', ['username' => $this->session->userdata('username')])->row_array();
+        $data['user_cuti'] = $this->db->get_where('form_cuti', ['id_user' => $this->session->userdata('id')])->row_array();
+
+        $data['absensi'] = $this->absensi->getAllAbsensi();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('absensi/riwayat_absensi', $data);
+        $this->load->view('templates/footer');
     }
 }

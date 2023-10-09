@@ -88,7 +88,7 @@
 								<div class="col-md-4">
 									<div class="form-group">
 										<label for="txt2">Jumlah Cuti Diambil :</label>
-										<input type="text" id="txt2" name="jml_cuti" class="form-control" onkeyup="sum();">
+										<input type="text" id="txt2" name="jml_cuti" class="form-control" onkeyup="sum();updateTanggalAkhirCuti();">
 										<?php echo form_error('jml_cuti', '<small class="text-danger pl-1">', '</small>'); ?>
 									</div>
 								</div>
@@ -104,21 +104,21 @@
 								<div class="col-md-4">
 									<div class="form-group">
 										<label for="tglCuti1">Tanggal Awal Cuti :</label>
-										<input type="date" id="tglCuti1" name="cuti" class="form-control">
+										<input type="date" id="tglCuti1" oninput="updateTanggalAkhirCuti()" name="cuti" class="form-control">
 										<?php echo form_error('cuti', '<small class="text-danger pl-1">', '</small>'); ?>
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
 										<label for="tglCuti2">Tanggal Akhir Cuti :</label>
-										<input type="date" id="tglCuti2" name="cuti2" class="form-control">
+										<input type="date" id="tglCuti2" name="cuti2" class="form-control" readonly>
 										<?php echo form_error('cuti2', '<small class="text-danger pl-1">', '</small>'); ?>
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
 										<label for="tglMasuk">Tanggal Masuk :</label>
-										<input type="date" id="tglMasuk" name="masuk" class="form-control">
+										<input type="date" id="tglMasuk" name="masuk" class="form-control" readonly>
 										<?php echo form_error('masuk', '<small class="text-danger pl-1">', '</small>'); ?>
 									</div>
 								</div>
@@ -214,7 +214,7 @@
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="txt2">Jumlah Cuti Diambil :</label>
-									<input type="text" id="txt2" name="jml_cuti" class="form-control" onkeyup="sum();">
+									<input type="text" id="txt2" name="jml_cuti" class="form-control" onkeyup="sum();updateTanggalAkhirCuti()">
 									<?php echo form_error('jml_cuti', '<small class="text-danger pl-1">', '</small>'); ?>
 								</div>
 							</div>
@@ -230,21 +230,21 @@
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="tglCuti1">Tanggal Awal Cuti :</label>
-									<input type="date" id="tglCuti1" name="cuti" class="form-control">
+									<input type="date" id="tglCuti1" name="cuti" class="form-control" oninput="updateTanggalAkhirCuti()">
 									<?php echo form_error('cuti', '<small class="text-danger pl-1">', '</small>'); ?>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="tglCuti2">Tanggal Akhir Cuti :</label>
-									<input type="date" id="tglCuti2" name="cuti2" class="form-control">
+									<input type="date" id="tglCuti2" name="cuti2" class="form-control" readonly>
 									<?php echo form_error('cuti2', '<small class="text-danger pl-1">', '</small>'); ?>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="tglMasuk">Tanggal Masuk :</label>
-									<input type="date" id="tglMasuk" name="masuk" class="form-control">
+									<input type="date" id="tglMasuk" name="masuk" class="form-control" readonly>
 									<?php echo form_error('masuk', '<small class="text-danger pl-1">', '</small>'); ?>
 								</div>
 							</div>

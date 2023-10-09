@@ -114,6 +114,72 @@
              document.getElementById('txt3').value = result;
          }
      }
+
+     async function checDateIsNationalHoliday(dateString) {
+         // Format dateString `Y-m-d`
+         var holidays = await $.ajax({
+             url: "https://api-harilibur.vercel.app/api",
+             type: 'get',
+         });
+
+         var nationalHolidays = [];
+
+         var result = false;
+         holidays.forEach(element => {
+             if (element.is_national_holiday && dateString === element.holiday_date) {
+                 result = true;
+                 return;
+             }
+         });
+
+         // Untuk mengecek apakah hari itu sabtu atau minggu
+         if (!result) {
+             var day = (new Date(dateString)).getDay();
+             result = day === 0 || day === 6;
+         }
+
+         return result;
+     }
+
+     async function updateTanggalAkhirCuti() {
+         var tanggalAwalCuti = document.getElementById('tglCuti1').value;
+         var jumlahCutiDiambil = parseInt(document.getElementById('txt2').value);
+
+         if (tanggalAwalCuti && jumlahCutiDiambil) {
+             var akhirCuti = new Date(tanggalAwalCuti);
+
+             jumlahCutiDiambil--;
+             while (jumlahCutiDiambil > 0) {
+                 akhirCuti.setDate(akhirCuti.getDate() + 1);
+                 var isHoliday = await checDateIsNationalHoliday(akhirCuti.toISOString().split('T')[0]);
+                 if (!isHoliday) {
+                     jumlahCutiDiambil--;
+                 }
+             }
+
+             document.getElementById('tglCuti2').value = akhirCuti.toISOString().split('T')[0];
+
+             // Variabel untuk mengecek kapan cuti berakhir untuk menentukan kapan pegawai masuk
+             var cutiBerlangsung = true;
+
+             while (cutiBerlangsung) {
+                 akhirCuti.setDate(akhirCuti.getDate() + 1);
+                 cutiBerlangsung = await checDateIsNationalHoliday(akhirCuti.toISOString().split('T')[0]);
+             }
+
+             document.getElementById('tglMasuk').value = akhirCuti.toISOString().split('T')[0];
+         }
+     }
+
+     function editProfileImageUpdated() {
+        var imgInp = document.getElementById('inputImgProfile');
+        var img = document.getElementById('imgProfile');
+         console.log(imgInp);
+         const [file] = imgInp.files
+         if (file) {
+            img.src = URL.createObjectURL(file)
+         }
+     }
  </script>
 
  <script type="text/javascript">

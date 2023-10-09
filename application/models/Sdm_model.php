@@ -188,7 +188,7 @@ class Sdm_model extends CI_Model
     {
         $query = "SELECT * 
                     FROM form_cuti
-                    WHERE role_id = 3 
+                    WHERE role_id = 3 OR role_id = 4
                     ORDER BY id DESC";
         return $this->db->query($query)->result_array();
     }

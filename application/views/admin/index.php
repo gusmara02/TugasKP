@@ -176,7 +176,7 @@
 							</div>
 							<div class="form-group">
 								<label>NIP :</label>
-								<input type="text" class="form-control form-control-sm" name="nik" value="<?php echo $kode_nik; ?>" readonly>
+								<input type="text" class="form-control form-control-sm" name="nik" value="<?php echo $kode_nik; ?>">
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -256,11 +256,11 @@
 					<div class="col-sm-10">
 						<div class="row">
 							<div class="col-sm-3">
-								<img src="<?php echo base_url('assets/img/profile/') . $user['image']; ?>" class="img-thumbnail">
+								<img src="<?php echo base_url('assets/img/profile/') . $user['image']; ?>"  class="img-thumbnail" id="imgProfile">
 							</div>
 							<div class="col-sm-9">
 								<div class="custom-file">
-									<input type="file" class="custom-file-input" name="image">
+									<input type="file" class="custom-file-input" name="image" id="inputImgProfile" onchange="editProfileImageUpdated()">
 									<label class="custom-file-label" for="image">Choose file</label>
 								</div>
 							</div>

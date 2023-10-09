@@ -122,7 +122,10 @@ class Kaur_model extends CI_model
     {
         $query = "SELECT * 
                     FROM form_cuti
-                    WHERE bagian = '$bagian' AND role_id = 4 
+                    WHERE 
+                    -- bagian = '$bagian'
+                    -- AND 
+                    role_id = 4 
                     ORDER BY id DESC";
         return $this->db->query($query)->result_array();
     }

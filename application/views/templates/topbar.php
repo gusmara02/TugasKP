@@ -1,3 +1,24 @@
+ <?php
+    $result = $this->db->like("check_in", date("Y-m-d"), "after")->get_where('absensi', ["id_user" => $user["id"]])->row();
+    $disabled = false;
+    $text = "Anda belum melakukan absensi, klik untuk check in.";
+    $color = "success";
+    if ($result) {
+        $disabled = (strtotime(date("Y-m-d H:i:s")) < strtotime(date("Y-m-d 00:00:00")));
+        $text = "Anda sudah check in";
+        $color = "secondary";
+
+        if (!$disabled && $result->check_out == null) {
+            $text = "Anda sudah bisa checkout, klik untuk check out.";
+            $color = "success";
+        } else if ($result->check_out != null) {
+            $disabled = true;
+            $text = "Anda sudah checkout. Terima kasih. :)";
+            $color = "success";
+        }
+    }
+    ?>
+
  <!-- Content Wrapper -->
  <div id="content-wrapper" class="d-flex flex-column">
 
@@ -13,6 +34,7 @@
              </button>
              <!-- Topbar Navbar -->
              <ul class="navbar-nav ml-auto">
+                 <a href="<?= base_url('absensi/check'); ?>" class="btn btn-<?= $color ?> btn-sm ml-2 my-3 <?= $disabled ? 'disabled' : '' ?>"><?= $text ?></a>
                  <div class="topbar-divider d-none d-sm-block"></div>
                  <!-- Nav Item - User Information -->
                  <li class="nav-item dropdown no-arrow">
