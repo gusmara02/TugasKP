@@ -10,6 +10,7 @@ class Admin extends CI_Controller
         $this->load->library('form_validation');
         $this->load->model('admin_model', 'admin');
         $this->load->model('Absensi_model', 'absensi');
+        $this->load->model('GajiBerkala_model', 'gaji');
         $this->load->helper('tglindo');
     }
 
@@ -210,5 +211,70 @@ class Admin extends CI_Controller
         $this->load->view('templates/topbar', $data);
         $this->load->view('absensi/riwayat_absensi', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function gaji_berkala()
+    {
+        $data['title'] = 'Gaji Berkala';
+        $data['user'] = $this->db->get_where('mst_user', ['username' => $this->session->userdata('username')])->row_array();
+        $data['user_cuti'] = $this->db->get_where('form_cuti', ['id_user' => $this->session->userdata('id')])->row_array();
+
+        $data['daftar_user'] = $this->admin->getAllUser();
+        $data['daftar_gaji_berkala'] = $this->gaji->getAllGajiBerkala();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/gaji-berkala', $data);
+        $this->load->view('templates/footer');
+
+        $this->session->set_flashdata('message', null);
+    }
+
+    public function add_gaji_berkala()
+    {
+        $id = $this->input->post("id");
+        $id_user = $this->input->post("id_user");
+        $nama = $this->input->post("nama");
+        $jabatan = $this->input->post("jabatan");
+        $bagian = $this->input->post("bagian");
+        $nik = $this->input->post("nik");
+        $tgl_cetak = $this->input->post("tgl_cetak");
+        if ($id) {
+            $this->db->set('tgl_cetak', $tgl_cetak);
+
+            $this->db->where('id', $id);
+            $this->db->update('gaji_berkala');
+            $this->session->set_flashdata('message', 'Simpan Perubahan');
+        } else {
+
+
+            $data = array(
+                "id_user" => $id_user,
+                "nama" => $nama,
+                "jabatan" => $jabatan,
+                "bagian" => $bagian,
+                "nik" => $nik,
+                "tgl_cetak" => $tgl_cetak,
+            );
+            $this->db->insert('gaji_berkala', $data);
+            $this->session->set_flashdata('message', 'Simpan');
+        }
+
+        redirect('admin/gaji_berkala');
+    }
+
+    public function get_gaji_berkala()
+    {
+        $id = $this->input->post('id');
+        echo json_encode($this->db->get_where('gaji_berkala', ['id' => $id])->row_array());
+    }
+
+    public function delete_gaji_berkala()
+    {
+        $id = $this->input->get('id');
+        $this->db->where('id', $id)->delete("gaji_berkala");
+        $this->session->set_flashdata('message', 'Data terhapus');
+        redirect('admin/gaji_berkala');
     }
 }
