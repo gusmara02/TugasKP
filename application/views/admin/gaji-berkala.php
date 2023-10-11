@@ -40,7 +40,7 @@
 										<td><?php echo $item['bagian']; ?></td>
 										<td><?php echo $item['tgl_cetak']; ?></td>
 										<td>
-											<a href="#" class="tombol-edit btn btn-warning btn-block btn-sm"><i class="fas fa-print"></i></a>
+											<a href="<?php echo base_url('admin/cetak_gaji_berkala'); ?>?id=<?php echo $item["id"]; ?>" class="tombol-edit btn btn-warning btn-block btn-sm"><i class="fas fa-print"></i></a>
 											<button class="tombol-edit btn btn-info btn-block btn-sm" data-id="<?php echo $item['id']; ?>" data-toggle="modal" data-target="#edit-user"><i class="fas fa-edit"></i></button>
 											<a href="<?php echo base_url('admin/delete_gaji_berkala'); ?>?id=<?php echo $item["id"]; ?>" class="tombol-edit btn btn-danger btn-block btn-sm"><i class="fas fa-trash"></i></a>
 										</td>

@@ -3,7 +3,7 @@ class GajiBerkala_model extends CI_Model
 {
     function getGajiBerkalaById($id)
     {
-        $result = $this->db->order_by('id', 'DESC')->get_where("gaji_berkala", ["id" => $id])->row_array();
+        $result = $this->db->get_where("gaji_berkala", ["id" => $id])->row_array();
 
         return $result;
     }

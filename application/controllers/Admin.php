@@ -267,7 +267,7 @@ class Admin extends CI_Controller
     public function get_gaji_berkala()
     {
         $id = $this->input->post('id');
-        echo json_encode($this->db->get_where('gaji_berkala', ['id' => $id])->row_array());
+        echo json_encode($this->gaji->getGajiBerkalaById($id));
     }
 
     public function delete_gaji_berkala()
@@ -276,5 +276,30 @@ class Admin extends CI_Controller
         $this->db->where('id', $id)->delete("gaji_berkala");
         $this->session->set_flashdata('message', 'Data terhapus');
         redirect('admin/gaji_berkala');
+    }
+
+    public function cetak_gaji_berkala()
+    {
+        $id = $this->input->get('id');
+        $gaji = $this->gaji->getGajiBerkalaById($id);
+
+        $this->load->library('Pdf');
+        $pdf = new FPDF('p', 'mm', 'A4');
+        $pdf->AddPage();
+        $pdf->Ln(10);
+        $pdf->SetFont('Times', 'B', 11);
+        $pdf->Cell(190, 5, 'GAJI BERKALA', 0, 1, 'C');
+        $pdf->Ln(10);
+        $pdf->SetFont('Times', '', 11);
+        $pdf->Cell(10, 5, 'Kepada Yth :', 0, 1);
+        $pdf->Cell(10, 5, 'Kabag ', 0, 1);
+        $pdf->Cell(10, 5, 'Di tempat.', 0, 1);
+        $pdf->Ln(6);
+        $pdf->Cell(10, 5, 'Nik : '.$gaji["nik"], 0, 1);
+        $pdf->Cell(10, 5, 'Nama : '.$gaji["nama"], 0, 1);
+        $pdf->Cell(10, 5, 'Jabatan : '.$gaji["jabatan"], 0, 1);
+        $pdf->Cell(10, 5, 'Bagian : '.$gaji["bagian"], 0, 1);
+        $pdf->Cell(10, 5, 'Tanggal cetak : '.$gaji["tgl_cetak"], 0, 1);
+        $pdf->Output();
     }
 }
