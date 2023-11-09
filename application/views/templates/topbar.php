@@ -4,7 +4,7 @@
     $text = "Anda belum melakukan absensi, klik untuk check in.";
     $color = "success";
     if ($result) {
-        $disabled = (strtotime(date("Y-m-d H:i:s")) < strtotime(date("Y-m-d 00:00:00")));
+        $disabled = (strtotime(date("Y-m-d H:i:s")) < strtotime(date("Y-m-d 16:00:00")));
         $text = "Anda sudah check in";
         $color = "secondary";
 

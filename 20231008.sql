@@ -71,7 +71,7 @@ CREATE TABLE `database`.`absensi` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `id_user` INT NOT NULL,
     `role_id` INT NOT NULL,
-    `nik` INT NOT NULL,
+    `nik` VARCHAR(255) NOT NULL,
     `nama` VARCHAR(255) NOT NULL,
     `bagian` VARCHAR(255) NOT NULL,
     `check_in` DATETIME NOT NULL,
