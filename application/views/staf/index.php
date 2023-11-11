@@ -96,6 +96,11 @@
                    </div>
                </div>
 
+               <div class="row">
+                   <div class="col-md-12">
+                       <canvas id="drawChart"></canvas>
+                   </div>
+               </div>
                <!-- Content Row -->
                <div class="row">
                    <div class="col-md-4">
@@ -115,7 +120,8 @@
                                                <li> Sisa Cuti : <strong> <?php echo $sisa_cuti['sisa_cuti']; ?> hari</strong></li>
                                                <?php if ($sisa_cuti['is_approve'] == 1) : ?>
                                                    <li><strong>Status : </strong><strong><span class="font-weight-bolder" style="font-size:18px;">Menunggu</span></strong>
-                                                       <strong><a href="<?php echo base_url(); ?>staf/edit_cuti/<?php echo $sisa_cuti['id']; ?>" class="btn btn-dark btn-sm"><i class="fas fa-edit"></i> Edit Data</a></strong></li>
+                                                       <strong><a href="<?php echo base_url(); ?>staf/edit_cuti/<?php echo $sisa_cuti['id']; ?>" class="btn btn-dark btn-sm"><i class="fas fa-edit"></i> Edit Data</a></strong>
+                                                   </li>
                                                <?php else : ?>
                                                    <li>Status : <strong><span class="font-weight-bolder" style="font-size:18px;">Disetujui</span></strong>
                                                        <a class="btn btn-primary btn-sm" href="<?php echo base_url(); ?>staf/cetak_data/<?php echo $sisa_cuti['id']; ?>" target="_blank" role="button"><i class="fas fa-print"></i> Cetak Data</a>
@@ -296,3 +302,20 @@
                </div>
            </div>
        </div>
+       <!-- Chart JS -->
+       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+       <script>
+           const ctx = document.getElementById('drawChart');
+
+           new Chart(ctx, {
+               type: 'line',
+               data: <?php echo json_encode($chartData)?>,
+               options: {
+                   scales: {
+                       y: {
+                           beginAtZero: true
+                       }
+                   }
+               }
+           });
+       </script>

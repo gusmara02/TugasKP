@@ -30,6 +30,10 @@ class Absensi extends CI_Controller
 
 	public function check()
 	{
+		if (!getHoliday("Y-m-d")) {
+			redirect('auth/blocked');
+		}
+
 		$user = $this->session->get_userdata();
 
 		$this->absensi->check($user);

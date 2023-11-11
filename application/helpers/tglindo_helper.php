@@ -25,3 +25,26 @@ if (!function_exists('format_indo_datetime')) {
         return ($result);
     }
 }
+
+if (!function_exists('isHoliday')) {
+    function getHoliday($dateString)
+    {
+        $holidays = json_decode(file_get_contents("https://api-harilibur.vercel.app/api"));
+        $result = null;
+
+        foreach ($holidays as $holiday) {
+            if ($holiday->is_national_holiday && $dateString === $holiday->holiday_date) {
+                $result = $holiday->holiday_name;
+                return $result;
+            }
+        }
+
+        // Untuk mengecek apakah hari itu sabtu atau minggu
+        if (!$result) {
+            $day = (int)date("w", strtotime($dateString));
+            $result = $day === 0 || $day === 6 ? "Weekend" : null;
+        }
+
+        return $result;
+    }
+}

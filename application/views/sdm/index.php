@@ -89,10 +89,15 @@
 			<div class="flash-data" data-flashdata="<?= $this->session->flashdata('message'); ?>"></div>
 			<div class="row">
 				<div class="col-md-12">
+					<canvas id="drawChart"></canvas>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
 					<div class="flash-data" data-flashdata="<?= $this->session->flashdata('message'); ?>"></div>
 					<div class="card">
 						<div class="card-header">
-							<a class="btn btn-primary btn-sm" href="<?php echo base_url('admin/add_user'); ?>" data-toggle="modal" data-target="#add-user"><i class="fas fa-user-plus"></i> Tambah User</a>
+							Daftar Pegawai
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -107,8 +112,6 @@
 											<th scope="col">Unit kerja</th>
 											<th scope="col">Jabatan</th>
 											<th scope="col">Status</th>
-											<th scope="col">Edit</th>
-											<th scope="col">Input Cuti</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -133,8 +136,6 @@
 												<?php else : ?>
 													<td><button class="btn btn-danger btn-sm btn-block">Tidak Aktif</button></td>
 												<?php endif; ?>
-												<td><button class="tombol-edit btn btn-info btn-block btn-sm" data-id="<?php echo $p['id']; ?>" data-toggle="modal" data-target="#edit-user"><i class="fas fa-edit"></i> Edit</button></td>
-												<td><button class="tombol-edit btn btn-secondary btn-block btn-sm" data-id="<?php echo $p['id']; ?>" data-toggle="modal" data-target="#input-cuti"><i class="fas fa-edit"></i> Input</button></td>
 											</tr>
 										<?php endforeach; ?>
 									</tbody>
@@ -255,7 +256,7 @@
 					<div class="col-sm-10">
 						<div class="row">
 							<div class="col-sm-3">
-								<img src="<?php echo base_url('assets/img/profile/') . $user['image']; ?>"  class="img-thumbnail" id="imgProfile">
+								<img src="<?php echo base_url('assets/img/profile/') . $user['image']; ?>" class="img-thumbnail" id="imgProfile">
 							</div>
 							<div class="col-sm-9">
 								<div class="custom-file">
@@ -424,5 +425,22 @@
 				$('#role_id_cuti').val(data.role_id);
 			}
 		});
+	});
+</script>
+<!-- Chart JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+	const ctx = document.getElementById('drawChart');
+
+	new Chart(ctx, {
+		type: 'line',
+		data: <?php echo json_encode($chartData) ?>,
+		options: {
+			scales: {
+				y: {
+					beginAtZero: true
+				}
+			}
+		}
 	});
 </script>

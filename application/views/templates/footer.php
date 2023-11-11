@@ -106,21 +106,49 @@
 
 
  <script>
+     var holidays;
+
+     callApiHolidays();
+
+     async function callApiHolidays() {
+         holidays = await $.ajax({
+             url: "https://api-harilibur.vercel.app/api",
+             type: 'get',
+         });
+     }
+
      function sum() {
+         var jenisCutiValue = document.getElementById('jenisCuti').value;
          var txtFirstNumberValue = document.getElementById('txt1').value;
          var txtSecondNumberValue = document.getElementById('txt2').value;
+
+         if (jenisCutiValue == "Cuti Melahirkan") {
+             txtSecondNumberValue = 90;
+             document.getElementById('txt2').readOnly = true;
+             document.getElementById('txt2').value = txtSecondNumberValue;
+             document.getElementById('ket').readOnly = true;
+             document.getElementById('ket').value = "Melahirkan";
+         } else if (jenisCutiValue == "Cuti Sakit") {
+             document.getElementById('txt2').readOnly = false;
+             document.getElementById('ket').readOnly = true;
+             document.getElementById('ket').value = "Sakit";
+         } else {
+             document.getElementById('txt2').readOnly = false;
+             document.getElementById('ket').readOnly = false;
+         }
+
+         if (jenisCutiValue != "Cuti Tahunan") {
+             document.getElementById('txt3').value = txtFirstNumberValue;
+         }
+
          var result = parseInt(txtFirstNumberValue) - parseInt(txtSecondNumberValue);
-         if (!isNaN(result)) {
+         if (!isNaN(result) && jenisCutiValue == 1) {
              document.getElementById('txt3').value = result;
          }
      }
 
      async function checDateIsNationalHoliday(dateString) {
          // Format dateString `Y-m-d`
-         var holidays = await $.ajax({
-             url: "https://api-harilibur.vercel.app/api",
-             type: 'get',
-         });
 
          var nationalHolidays = [];
 
@@ -172,12 +200,12 @@
      }
 
      function editProfileImageUpdated() {
-        var imgInp = document.getElementById('inputImgProfile');
-        var img = document.getElementById('imgProfile');
+         var imgInp = document.getElementById('inputImgProfile');
+         var img = document.getElementById('imgProfile');
          console.log(imgInp);
          const [file] = imgInp.files
          if (file) {
-            img.src = URL.createObjectURL(file)
+             img.src = URL.createObjectURL(file)
          }
      }
  </script>

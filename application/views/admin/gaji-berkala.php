@@ -95,7 +95,7 @@
 							</div>
 							<div class="form-group">
 								<label>Tanggal Cetak :</label>
-								<input type="date" id="tgl_cetak" name="tgl_cetak" class="form-control" value="<?php echo date("Y-m-d"); ?>">
+								<input type="text" placeholder="tanggal/bulan/tahun" onfocus="(this.type='date')"  onblur="(this.type='text')" id="tgl_cetak" name="tgl_cetak" class="form-control" value="<?php echo date("Y-m-d"); ?>">
 							</div>
 						</div>
 					</div>
@@ -135,7 +135,7 @@
 					</div>
 					<div class="form-group">
 						<label>Tanggal Cetak :</label>
-						<input type="date" id="edit_tgl_cetak" name="tgl_cetak" class="form-control" value="<?php echo date("Y-m-d"); ?>">
+						<input type="text" placeholder="tanggal/bulan/tahun" onfocus="(this.type='date')"  onblur="(this.type='text')" id="edit_tgl_cetak" name="tgl_cetak" class="form-control" value="<?php echo date("Y-m-d"); ?>">
 					</div>
 					<button type="submit" name="add_user" class="btn btn-primary">Simpan Data</button>
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Tutup</button>

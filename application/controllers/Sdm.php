@@ -10,6 +10,7 @@ class Sdm extends CI_Controller
         $this->load->library('form_validation');
         $this->load->model('Sdm_model', 'sdm');
         $this->load->helper('tglindo');
+        $this->load->model('Cuti_model', 'cuti');
     }
 
     public function index()
@@ -40,27 +41,13 @@ class Sdm extends CI_Controller
             $data['pegawai'] = $this->sdm->getUser();
             $data['kode_nik'] = $this->sdm->getKodeNik();
 
+            $data["chartData"] = $this->cuti->getChartData();
+
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
             $this->load->view('sdm/index', $data);
             $this->load->view('templates/footer');
-        } else {
-            $data = array(
-                'nama' => $this->input->post('nama', true),
-                'jabatan' => $this->input->post('jabatan', true),
-                'bagian' => $this->input->post('bagian', true),
-                'nik' => $this->input->post('nik', true),
-                'image' => 'default.jpg',
-                'role_id' => $this->input->post('role_id', true),
-                'date_created' => date('Y-m-d'),
-                'username' => $this->input->post('username', true),
-                'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-                'is_active' => 1
-            );
-            $this->db->insert('mst_user', $data);
-            $this->session->set_flashdata('message', 'Tambah data');
-            redirect('sdm/index');
         }
     }
 
@@ -447,6 +434,11 @@ class Sdm extends CI_Controller
 
     public function approve_cuti_kaur()
     {
+        $user = $this->db->get_where('mst_user', ['username' => $this->session->userdata('username')])->row_array();
+        if ($user["role_id"] != 2) {
+            redirect('auth/blocked');
+        }
+
         $nama_atasan = $this->session->userdata('nama');
         $id = $this->input->post('id');
         $nama_kabid = $this->input->post('nama_kabid');
@@ -487,6 +479,11 @@ class Sdm extends CI_Controller
 
     public function approvecuti_lain_kaur()
     {
+        $user = $this->db->get_where('mst_user', ['username' => $this->session->userdata('username')])->row_array();
+        if ($user["role_id"] != 2) {
+            redirect('auth/blocked');
+        }
+
         $nama_atasan = $this->session->userdata('nama');
         $id = $this->input->post('id');
         $atasan = $nama_atasan;

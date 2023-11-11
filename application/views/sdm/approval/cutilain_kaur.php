@@ -25,7 +25,13 @@
                              <th scope="col">Tgl Awal Cuti</th>
                              <th scope="col">Tgl Akhir Cuti</th>
                              <th scope="col">Tgl Masuk</th>
-                             <th scope="col">Opsi</th>
+                             <?php
+                                if ($user["role_id"] == "2") {
+                                ?>
+                                 <th>Opsi</th>
+                             <?php
+                                }
+                                ?>
                          </tr>
                      </thead>
                      <tbody>
@@ -40,7 +46,13 @@
                                      <td><?php echo format_indo($sc['cuti']); ?></td>
                                      <td><?php echo format_indo($sc['cuti2']); ?></td>
                                      <td><?php echo format_indo($sc['masuk']); ?></td>
-                                     <td><button class="tombol-edit btn btn-info btn-block btn-sm" data-id="<?php echo $sc['id']; ?>" data-toggle="modal" data-target="#edit-user"><i class="fas fa-edit"></i> Approval</button></td>
+                                     <?php
+                                        if ($user["role_id"] == "2") {
+                                        ?>
+                                         <td><button class="tombol-edit btn btn-info btn-block btn-sm" data-id="<?php echo $sc['id']; ?>" data-toggle="modal" data-target="#edit-user"><i class="fas fa-edit"></i> Approval</button></td>
+                                     <?php
+                                        }
+                                        ?>
                                  </tr>
                              <?php endif; ?>
                          <?php endforeach; ?>

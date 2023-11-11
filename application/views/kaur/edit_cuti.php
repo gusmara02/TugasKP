@@ -23,7 +23,7 @@
                                      <input type="hidden" name="id" value="<?php echo $sisa_cuti['id']; ?>">
                                      <input type="hidden" name="role_id" value="<?php echo $user['role_id']; ?>">
                                      <label for="input">Tgl Input</label>
-                                     <input type="date" id="input" name="input" class="form-control" value="<?php echo $sisa_cuti['input']; ?>" readonly>
+                                     <input type="text" placeholder="tanggal/bulan/tahun" onfocus="(this.type='date')"  onblur="(this.type='text')" id="input" name="input" class="form-control" value="<?php echo $sisa_cuti['input']; ?>" readonly>
                                  </div>
                              </div>
                              <div class="col-md-6">
@@ -81,19 +81,19 @@
                              <div class="col-md-4">
                                  <div class="form-group">
                                      <label for="tglCuti1">Tgl Awal Cuti</label>
-                                     <input type="date" id="tglCuti1" name="cuti" class="form-control" value="<?php echo $sisa_cuti['cuti']; ?>">
+                                     <input type="text" placeholder="tanggal/bulan/tahun" onfocus="(this.type='date')"  onblur="(this.type='text')" id="tglCuti1" name="cuti" class="form-control" value="<?php echo $sisa_cuti['cuti']; ?>">
                                  </div>
                              </div>
                              <div class="col-md-4">
                                  <div class="form-group">
                                      <label for="tglCuti2">Tgl Akhir Cuti</label>
-                                     <input type="date" id="tglCuti2" name="cuti2" class="form-control" value="<?php echo $sisa_cuti['cuti2']; ?>">
+                                     <input type="text" placeholder="tanggal/bulan/tahun" onfocus="(this.type='date')"  onblur="(this.type='text')" id="tglCuti2" name="cuti2" class="form-control" value="<?php echo $sisa_cuti['cuti2']; ?>">
                                  </div>
                              </div>
                              <div class="col-md-4">
                                  <div class="form-group">
                                      <label for="tglMasuk">Masuk</label>
-                                     <input type="date" id="tglMasuk" name="masuk" class="form-control" value="<?php echo $sisa_cuti['masuk']; ?>">
+                                     <input type="text" placeholder="tanggal/bulan/tahun" onfocus="(this.type='date')"  onblur="(this.type='text')" id="tglMasuk" name="masuk" class="form-control" value="<?php echo $sisa_cuti['masuk']; ?>">
                                  </div>
                              </div>
                          </div>

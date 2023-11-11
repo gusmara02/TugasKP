@@ -55,7 +55,7 @@
                                 ?>
                              <div class="form-group">
                                  <label for="tglLahir">Tgl Lahir</label>
-                                 <input type="date" class="form-control" id="tglLahir" name="tgl_lahir" value="<?php echo $tgllahir; ?>">
+                                 <input type="text" placeholder="tanggal/bulan/tahun" onfocus="(this.type='date')"  onblur="(this.type='text')" class="form-control" id="tglLahir" name="tgl_lahir" value="<?php echo $tgllahir; ?>">
                              </div>
                              <div class="form-group">
                                  <label for="namaJenjang">Pendidikan Terakhir</label>

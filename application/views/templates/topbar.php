@@ -1,20 +1,33 @@
  <?php
-    $result = $this->db->like("check_in", date("Y-m-d"), "after")->get_where('absensi', ["id_user" => $user["id"]])->row();
-    $disabled = false;
-    $text = "Anda belum melakukan absensi, klik untuk check in.";
-    $color = "success";
-    if ($result) {
-        $disabled = (strtotime(date("Y-m-d H:i:s")) < strtotime(date("Y-m-d 16:00:00")));
-        $text = "Anda sudah check in";
-        $color = "secondary";
+    $cuti = $this->db->where("cuti <=", date("Y-m-d"))->where("cuti2 >=", date("Y-m-d"))->get_where('form_cuti', ["id_user" => $user["id"]])->row();
+    $cuti = $cuti ? $cuti : $this->db->where("cuti <=", date("Y-m-d"))->where("cuti2 >=", date("Y-m-d"))->get_where('formcuti_lain', ["id_user" => $user["id"]])->row();
 
-        if (!$disabled && $result->check_out == null) {
-            $text = "Anda sudah bisa checkout, klik untuk check out.";
-            $color = "success";
-        } else if ($result->check_out != null) {
-            $disabled = true;
-            $text = "Anda sudah checkout. Terima kasih. :)";
-            $color = "success";
+    if ($cuti) {
+        $disabled = true;
+        $text = "Hari ini cuti: " . $cuti->keterangan . ". Anda masuk tanggal " . format_indo($cuti->masuk);
+        $color = "secondary";
+    } else if ($holiday = getHoliday(date("Y-m-d"))) {
+        $disabled = true;
+        $text = "Hari ini libur: " . $holiday;
+        $color = "secondary";
+    } else {
+        $result = $this->db->like("check_in", date("Y-m-d"), "after")->get_where('absensi', ["id_user" => $user["id"]])->row();
+        $disabled = false;
+        $text = "Anda belum melakukan absensi, klik untuk check in.";
+        $color = "success";
+        if ($result) {
+            $disabled = (strtotime(date("Y-m-d H:i:s")) < strtotime(date("Y-m-d 16:00:00")));
+            $text = "Anda sudah check in";
+            $color = "secondary";
+
+            if (!$disabled && $result->check_out == null) {
+                $text = "Anda sudah bisa checkout, klik untuk check out.";
+                $color = "success";
+            } else if ($result->check_out != null) {
+                $disabled = true;
+                $text = "Anda sudah checkout. Terima kasih. :)";
+                $color = "success";
+            }
         }
     }
     ?>

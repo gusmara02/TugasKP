@@ -172,7 +172,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Tanggal Lahir</label>
-                                        <input type="date" class="form-control form-control-sm" name="tgl_lahir" value="<?php echo $pegawai['tgl_lahir']; ?>" required>
+                                        <input type="text" placeholder="tanggal/bulan/tahun" onfocus="(this.type='date')"  onblur="(this.type='text')" class="form-control form-control-sm" name="tgl_lahir" value="<?php echo $pegawai['tgl_lahir']; ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -273,7 +273,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Tanggal Lahir</label>
-                                <input type="date" class="form-control form-control-sm" name="tgl_lahir" required>
+                                <input type="text" placeholder="tanggal/bulan/tahun" onfocus="(this.type='date')"  onblur="(this.type='text')" class="form-control form-control-sm" name="tgl_lahir" required>
                             </div>
                             <div class="form-group">
                                 <label>Agama</label>

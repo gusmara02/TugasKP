@@ -10,6 +10,7 @@ class Kaur extends CI_Controller
 		$this->load->library('form_validation');
 		$this->load->helper('tglindo');
 		$this->load->model('Kaur_model', 'user_cuti');
+		$this->load->model('Cuti_model', 'cuti');
 	}
 
 	public function index()
@@ -54,6 +55,7 @@ class Kaur extends CI_Controller
 		$record = $this->db->get("form_cuti");
 		$data['records'] = $record->result();
 
+		$data["chartData"] = $this->cuti->getChartData($id);
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/sidebar', $data);

@@ -121,7 +121,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Tanggal Lahir</label>
-                                        <input type="date" class="form-control form-control-sm" name="tgl_lahir" required>
+                                        <input type="text" placeholder="tanggal/bulan/tahun" onfocus="(this.type='date')"  onblur="(this.type='text')" class="form-control form-control-sm" name="tgl_lahir" required>
                                     </div>
                                 </div>
                             </div>
@@ -206,7 +206,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Tgl Lahir</label>
-                                <input type="date" class="form-control form-control-sm" name="tgl_lahir_keluarga" required>
+                                <input type="text" placeholder="tanggal/bulan/tahun" onfocus="(this.type='date')"  onblur="(this.type='text')" class="form-control form-control-sm" name="tgl_lahir_keluarga" required>
                             </div>
                         </div>
                     </div>

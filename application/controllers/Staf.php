@@ -9,6 +9,7 @@ class Staf extends CI_Controller
         is_logged_in();
         $this->load->helper('tglindo');
         $this->load->model('Staf_model', 'user_cuti');
+        $this->load->model('Cuti_model', 'cuti');
     }
     public function index()
     {
@@ -38,6 +39,8 @@ class Staf extends CI_Controller
         $data['history_countcutilain'] = $query->pending;
         $record = $this->db->get("formcuti_lain");
         $data['records'] = $record->result();
+
+        $data["chartData"] = $this->cuti->getChartData($id_user);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
