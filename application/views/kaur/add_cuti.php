@@ -11,7 +11,7 @@
 	<div class="card">
 		<h5 class="card-header">
 			<strong><?= $title; ?></strong>
-			<button class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Cuti Lain</button>
+			<!-- <button class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> Cuti Lain</button> -->
 		</h5>
 		<div class="card-body">
 			<!-- Page Content -->
@@ -61,6 +61,7 @@
 											<option>Cuti Tahunan</option>
 											<option>Cuti Sakit</option>
 											<option>Cuti Melahirkan</option>
+											<option>Cuti Lain</option>
 										</select>
 									</div>
 									<div class="form-group">
@@ -191,6 +192,7 @@
 											<option>Cuti Tahunan</option>
 											<option>Cuti Sakit</option>
 											<option>Cuti Melahirkan</option>
+											<option>Cuti Lain</option>
 										</select>
 									</div>
 								</div>
@@ -285,7 +287,7 @@
 
 
 <!-- Modal Cuti diluar tanggungan -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -367,7 +369,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
 
 <!-- Modal Kalender -->
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">

@@ -11,7 +11,7 @@
     <div class="card">
         <h5 class="card-header">
             <strong><?= $title; ?></strong>
-            <a href="<?php echo base_url('kaur/history_cutilain'); ?>" class="btn btn-primary btn-sm float-right">View Cuti Lain</a>
+            <!-- <a href="<?php echo base_url('kaur/history_cutilain'); ?>" class="btn btn-primary btn-sm float-right">View Cuti Lain</a> -->
         </h5>
         <div class="card-body">
             <div class="table-responsive">

@@ -354,34 +354,49 @@ class Staf extends CI_Controller
         $pdf->Output();
     }
 
-    public function add_cuti_lain()
-    {
-        $this->form_validation->set_rules('cuti', 'Tanggal Cuti 1', 'required|callback__cuti_check');
-        $this->form_validation->set_rules('cuti2', 'Tanggal Cuti 2', 'required|callback__cuti_check');
-        $this->form_validation->set_rules('masuk', 'Tanggal Masuk', 'required|callback__cuti_check');
+    // public function add_cuti_lain()
+    // {
+    //     $this->form_validation->set_rules('nama', 'nama', 'required');
+    //     $this->form_validation->set_rules('cuti', 'Tanggal Cuti 1', 'required|callback__cuti_check');
+    //     $this->form_validation->set_rules('cuti2', 'Tanggal Cuti 2', 'required|callback__cuti_check');
+    //     $this->form_validation->set_rules('masuk', 'Tanggal Masuk', 'required|callback__cuti_check');
+    //     if ($this->form_validation->run() == false) {
+    //         $data['title'] = 'Input Cuti';
+    //         $data['user'] = $this->db->get_where('mst_user', ['username' => $this->session->userdata('username')])->row_array();
+    //         $data['user_cuti'] = $this->db->get_where('form_cuti', ['id_user' => $this->session->userdata('id')])->row_array();
+    //         $data['sisa_cuti'] = $this->user_cuti->getSisaCuti();
+    //         $data['kode_unik'] = $this->user_cuti->getKodeUnik();
+    //         $data['kode_unik2'] = $this->user_cuti->getKodeUnik2();
 
-        $data = [
-            'id_user' => $this->input->post('id_user', true),
-            'kode_unik2' => $this->input->post('kode_unik2'),
-            'role_id' => $this->input->post('role_id', true),
-            'tgl_input' => $this->input->post('tgl_input', true),
-            'nik' => $this->input->post('nik', true),
-            'nama' => $this->input->post('nama', true),
-            'jabatan' => $this->input->post('jabatan', true),
-            'bagian' => $this->input->post('bagian', true),
-            'keterangan' => $this->input->post('keterangan', true),
-            'alamat' => $this->input->post('alamat', true),
-            'jenis_cuti' => $this->input->post('jenis_cuti', true),
-            'telp' => $this->input->post('telp', true),
-            'cuti' => $this->input->post('cuti', true),
-            'cuti2' => $this->input->post('cuti2', true),
-            'masuk' => $this->input->post('masuk', true),
-            'is_approve' => 1
-        ];
-        $this->db->insert('formcuti_lain', $data);
-        $this->session->set_flashdata('message', 'Simpan data');
-        redirect('staf/history_cutilain');
-    }
+    //         $this->load->view('templates/header', $data);
+    //         $this->load->view('templates/sidebar', $data);
+    //         $this->load->view('templates/topbar', $data);
+    //         $this->load->view('staf/add_cuti', $data);
+    //         $this->load->view('templates/footer');
+    //     } else {
+    //         $data = [
+    //             'id_user' => $this->input->post('id_user', true),
+    //             'kode_unik2' => $this->input->post('kode_unik2'),
+    //             'role_id' => $this->input->post('role_id', true),
+    //             'tgl_input' => $this->input->post('tgl_input', true),
+    //             'nik' => $this->input->post('nik', true),
+    //             'nama' => $this->input->post('nama', true),
+    //             'jabatan' => $this->input->post('jabatan', true),
+    //             'bagian' => $this->input->post('bagian', true),
+    //             'keterangan' => $this->input->post('keterangan', true),
+    //             'alamat' => $this->input->post('alamat', true),
+    //             'jenis_cuti' => $this->input->post('jenis_cuti', true),
+    //             'telp' => $this->input->post('telp', true),
+    //             'cuti' => $this->input->post('cuti', true),
+    //             'cuti2' => $this->input->post('cuti2', true),
+    //             'masuk' => $this->input->post('masuk', true),
+    //             'is_approve' => 1
+    //         ];
+    //         $this->db->insert('formcuti_lain', $data);
+    //         $this->session->set_flashdata('message', 'Simpan data');
+    //         redirect('staf/history_cutilain');
+    //     }
+    // }
 
     public function history_cutilain()
     {

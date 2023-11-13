@@ -11,7 +11,7 @@
        <div class="card">
            <h5 class="card-header">
                <strong><?= $title; ?></strong>
-               <a href="<?php echo base_url('staf/history_cutilain'); ?>" class="btn btn-secondary btn-sm float-right ml-2">View Cuti Lain</a>
+               <!-- <a href="<?php echo base_url('staf/history_cutilain'); ?>" class="btn btn-secondary btn-sm float-right ml-2">View Cuti Lain</a> -->
                <a href="javascript:window.history.go(-1);" class="btn btn-info btn-sm float-right">Kembali</a>
            </h5>
            <div class="card-body">
