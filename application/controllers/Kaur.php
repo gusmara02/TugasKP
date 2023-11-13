@@ -132,15 +132,30 @@ class Kaur extends CI_Controller
 		}
 	}
 
+	function _cuti_check()
+	{
+		if (strtotime($this->input->post('cuti')) <= strtotime(date("Y-m-d"))) {
+			$this->form_validation->set_message('_cuti_check', '%s harus lebih dari hari ini.');
+			return false;
+		}
+
+		if (strtotime($this->input->post('cuti2')) < strtotime($this->input->post('cuti'))) {
+			$this->form_validation->set_message('_cuti_check', 'Tanggal cuti awal dan akhir tidak sesuai.');
+			return false;
+		}
+
+		return true;
+	}
+
 	public function add_cuti()
 	{
 		$this->form_validation->set_rules('input', 'Tanggal', 'required|trim');
 		$this->form_validation->set_rules('keterangan', 'Keterangan', 'required|trim');
 		$this->form_validation->set_rules('jml_cuti', 'Jumlah Cuti', 'required|trim|numeric|greater_than[0]');
 		$this->form_validation->set_rules('sisa_cuti', 'Sisa Cuti', 'required|trim|numeric|greater_than[-1]');
-		$this->form_validation->set_rules('cuti', 'Tanggal Cuti 1', 'required|trim');
-		$this->form_validation->set_rules('cuti2', 'Tanggal Cuti 2', 'required|trim');
-		$this->form_validation->set_rules('masuk', 'Tanggal Masuk', 'required|trim');
+		$this->form_validation->set_rules('cuti', 'Tanggal Cuti 1', 'required|trim|callback__cuti_check');
+		$this->form_validation->set_rules('cuti2', 'Tanggal Cuti 2', 'required|trim|callback__cuti_check');
+		$this->form_validation->set_rules('masuk', 'Tanggal Masuk', 'required|trim|callback__cuti_check');
 		$this->form_validation->set_rules('alamat', 'Alamat', 'required|trim');
 		$this->form_validation->set_rules('telp', 'No Telp', 'required|trim');
 
@@ -246,15 +261,17 @@ class Kaur extends CI_Controller
 	public function add_cuti_lain()
 	{
 		$this->form_validation->set_rules('nama', 'nama', 'required');
-		$this->form_validation->set_rules('cuti', 'Tanggal Cuti 1', 'required');
-		$this->form_validation->set_rules('cuti2', 'Tanggal Cuti 2', 'required');
-		$this->form_validation->set_rules('masuk', 'Tanggal Masuk', 'required');
+		$this->form_validation->set_rules('cuti', 'Tanggal Cuti 1', 'required|callback__cuti_check');
+		$this->form_validation->set_rules('cuti2', 'Tanggal Cuti 2', 'required|callback__cuti_check');
+		$this->form_validation->set_rules('masuk', 'Tanggal Masuk', 'required|callback__cuti_check');
 
 		if ($this->form_validation->run() == false) {
-			$data['title'] = 'Input Cuti Tahunan';
+			$data['title'] = 'Input Cuti';
 			$data['user'] = $this->db->get_where('mst_user', ['username' => $this->session->userdata('username')])->row_array();
 			$data['user_cuti'] = $this->db->get_where('form_cuti', ['id_user' => $this->session->userdata('id')])->row_array();
 			$data['sisa_cuti'] = $this->user_cuti->getSisaCuti();
+			$data['kode_unik'] = $this->user_cuti->getKodeUnik();
+			$data['kode_unik2'] = $this->user_cuti->getKodeUnik2();
 
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/sidebar', $data);
@@ -668,7 +685,6 @@ class Kaur extends CI_Controller
 			$pdf->Cell(62, 5, ucwords($row['nama_kabag']), 0, 0, 'C');
 			$pdf->Cell(62, 5, '', 0, 0, 'C');
 			$pdf->Cell(62, 5, ucwords($row['nama_direktur']), 0, 1, 'C');
-			
 		}
 		$pdf->Output();
 	}

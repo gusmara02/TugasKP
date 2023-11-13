@@ -117,13 +117,28 @@ class Staf extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    function _cuti_check()
+    {
+        if (strtotime($this->input->post('cuti')) <= strtotime(date("Y-m-d"))) {
+            $this->form_validation->set_message('_cuti_check', '%s harus lebih dari hari ini.');
+            return false;
+        }
+
+        if (strtotime($this->input->post('cuti2')) < strtotime($this->input->post('cuti'))) {
+            $this->form_validation->set_message('_cuti_check', 'Tanggal cuti awal dan akhir tidak sesuai.');
+            return false;
+        }
+
+        return true;
+    }
+
     public function add_cuti()
     {
         $this->form_validation->set_rules('input', 'Tanggal', 'required|trim');
         $this->form_validation->set_rules('keterangan', 'Keterangan', 'required|trim');
         $this->form_validation->set_rules('jml_cuti', 'Ambil cuti', 'required|trim|numeric|greater_than[0]');
         $this->form_validation->set_rules('sisa_cuti', 'Sisa Cuti', 'required|trim|greater_than[-1]');
-        $this->form_validation->set_rules('cuti', 'Tanggal Cuti 1', 'required|trim');
+        $this->form_validation->set_rules('cuti', 'Tanggal Cuti 1', 'required|trim|callback__cuti_check');
         $this->form_validation->set_rules('cuti2', 'Tanggal Cuti 2', 'required|trim');
         $this->form_validation->set_rules('masuk', 'Tanggal Masuk', 'required|trim');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required|trim');
@@ -341,6 +356,10 @@ class Staf extends CI_Controller
 
     public function add_cuti_lain()
     {
+        $this->form_validation->set_rules('cuti', 'Tanggal Cuti 1', 'required|callback__cuti_check');
+        $this->form_validation->set_rules('cuti2', 'Tanggal Cuti 2', 'required|callback__cuti_check');
+        $this->form_validation->set_rules('masuk', 'Tanggal Masuk', 'required|callback__cuti_check');
+
         $data = [
             'id_user' => $this->input->post('id_user', true),
             'kode_unik2' => $this->input->post('kode_unik2'),
@@ -500,7 +519,6 @@ class Staf extends CI_Controller
             $pdf->Cell(62, 5, ucwords($row['nama_kabag']), 0, 0, 'C');
             $pdf->Cell(62, 5, '', 0, 0, 'C');
             $pdf->Cell(62, 5, ucwords($row['nama_direktur']), 0, 1, 'C');
-            
         }
 
         $pdf->Output();

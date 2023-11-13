@@ -142,7 +142,7 @@
          }
 
          var result = parseInt(txtFirstNumberValue) - parseInt(txtSecondNumberValue);
-         if (!isNaN(result) && jenisCutiValue == 1) {
+         if (!isNaN(result) && jenisCutiValue == "Cuti Tahunan") {
              document.getElementById('txt3').value = result;
          }
      }

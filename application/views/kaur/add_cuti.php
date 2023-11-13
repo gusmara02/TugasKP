@@ -90,14 +90,14 @@
 										<div class="col-md-4">
 											<div class="form-group">
 												<label for="txt2">Jumlah Cuti Diambil :</label>
-												<input type="text" id="txt2" name="jml_cuti" class="form-control" onkeyup="sum();">
+												<input type="text" id="txt2" name="jml_cuti" class="form-control" value="<?php echo set_value('jml_cuti'); ?>" onkeyup="sum();updateTanggalAkhirCuti()">
 												<?php echo form_error('jml_cuti', '<small class="text-danger pl-1">', '</small>'); ?>
 											</div>
 										</div>
 										<div class="col-md-4">
 											<div class="form-group">
 												<label for="txt3">Sisa Cuti Sekarang :</label>
-												<input type="text" id="txt3" name="sisa_cuti" class="form-control" readonly>
+												<input type="text" id="txt3" name="sisa_cuti" class="form-control" value="<?php echo set_value('sisa_cuti'); ?>" readonly>
 												<?php echo form_error('sisa_cuti', '<small class="text-danger pl-1">', '</small>'); ?>
 											</div>
 										</div>
@@ -106,21 +106,21 @@
 										<div class="col-md-4">
 											<div class="form-group">
 												<label for="tglCuti1">Tanggal Awal Cuti :</label>
-												<input type="text" placeholder="tanggal/bulan/tahun" onfocus="(this.type='date')" onblur="(this.type='text')" id="tglCuti1" name="cuti" class="form-control">
+												<input type="text" placeholder="tanggal/bulan/tahun" onfocus="(this.type='date')" onblur="(this.type='text')" id="tglCuti1" name="cuti" class="form-control" value="<?php echo set_value('cuti'); ?>" oninput="updateTanggalAkhirCuti()">
 												<?php echo form_error('cuti', '<small class="text-danger pl-1">', '</small>'); ?>
 											</div>
 										</div>
 										<div class="col-md-4">
 											<div class="form-group">
 												<label for="tglCuti2">Tanggal Akhir Cuti :</label>
-												<input type="text" placeholder="tanggal/bulan/tahun" onfocus="(this.type='date')" onblur="(this.type='text')" id="tglCuti2" name="cuti2" class="form-control">
+												<input type="text" placeholder="tanggal/bulan/tahun" onfocus="(this.type='date')" onblur="(this.type='text')" id="tglCuti2" name="cuti2" class="form-control" value="<?php echo set_value('cuti2'); ?>" readonly>
 												<?php echo form_error('cuti2', '<small class="text-danger pl-1">', '</small>'); ?>
 											</div>
 										</div>
 										<div class="col-md-4">
 											<div class="form-group">
 												<label for="tglMasuk">Tanggal Masuk :</label>
-												<input type="text" placeholder="tanggal/bulan/tahun" onfocus="(this.type='date')" onblur="(this.type='text')" id="tglMasuk" name="masuk" class="form-control">
+												<input type="text" placeholder="tanggal/bulan/tahun" onfocus="(this.type='date')" onblur="(this.type='text')" id="tglMasuk" name="masuk" class="form-control" value="<?php echo set_value('masuk'); ?>" readonly>
 												<?php echo form_error('masuk', '<small class="text-danger pl-1">', '</small>'); ?>
 											</div>
 										</div>
